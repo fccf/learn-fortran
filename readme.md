@@ -1,22 +1,17 @@
 # learn-fortran
 ## 自动重分配
-```fortran
-character(:), allocatable :: s
-real, allocatable :: r(:)
-s = 'a'
-s = 'abc'
-s = 'abc def'
-allocate(r(1))   !< size(r) = 1
-r = [1.,2.,3.,4] !< size(r) = 4
-```
+fortran 动态数组在数组大小不一致时会自动将等号左边的数据与等号右边的相等，只需要数组的维度相等就形。 [learn_auto_realloc](./src/learn_auto_realloc.f90),[learn_allocatable_character](./src/learn_allocatable_character.f90)
+
 ## pure 程序
 - pure程序不会对输入参数以及模块中的数据进行修改。局部变量不能有save属性，也不能初始化。
 
+
 ## elemental 程序
-- elemental形参是标量，但输入参数可以是标量也可以是数组，如果是数组，则对数组中的每一个元素进行该操作。
+- elemental形参是标量，但输入参数可以是标量也可以是数组，如果是数组，则对数组中的每一个元素进行该操作。 [learn_elemental](./src/learn_elemental.f90)
+
 
 ## class(\*) 类型
-- class(\*)作为输入参数可以实现多态，即输入参数可以为各种数据类型，然后在程序中使用 select type 来对各种不同的数据类型进行不同的操作，相同的操作可以公用。
+- class(\*)作为输入参数可以实现多态，即输入参数可以为各种数据类型，然后在程序中使用 select type 来对各种不同的数据类型进行不同的操作，相同的操作可以公用。 [learn_class_star](./src/learn_class_star.f90)
 
 
 ## final 程序
@@ -30,3 +25,4 @@ r = [1.,2.,3.,4] !< size(r) = 4
 - intent属性不能为(out)。
 - 可以绑定多个程序。
 - 参数可以是标量或数组，也可以是elemental 程序。
+[learn_final](./src/learn_final.f90)
