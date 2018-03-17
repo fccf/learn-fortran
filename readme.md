@@ -1,4 +1,14 @@
 # learn-fortran
+## 自动重分配
+```fortran
+character(:), allocatable :: s
+real, allocatable :: r(:)
+s = 'a'
+s = 'abc'
+s = 'abc def'
+allocate(r(1))   !< size(r) = 1
+r = [1.,2.,3.,4] !< size(r) = 4
+```
 ## pure 程序
 - pure程序不会对输入参数以及模块中的数据进行修改。局部变量不能有save属性，也不能初始化。
 
