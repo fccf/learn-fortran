@@ -43,7 +43,7 @@ contains
 
   end function color_map
 
-  subroutine show_rogress(m,p,ml)
+  subroutine show_progress(m,p,ml)
     !! Create a progress bar through successive calls
     character(*),intent(in)::m
     !! Message to display
@@ -74,7 +74,7 @@ contains
     write(output_unit,'(a)',advance='no') colorize('] ',[5,5,0]) //colorize(trim(persent)//' %',color_map(p,[0.0,1.0]))
     flush(output_unit)
 
-  end subroutine show_rogress
+  end subroutine show_progress
 
 end module learn_color
 
@@ -98,7 +98,7 @@ program color_test
 
   do n = 1,100
     call wait(0.1)
-    call show_rogress('progress',n/100.0,10)
+    call show_progress('progress',n/100.0,10)
   enddo
   write(output_unit,*)
 
