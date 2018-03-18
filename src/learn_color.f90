@@ -1,5 +1,6 @@
 module learn_color
-
+  use iso_fortran_env, only:output_unit
+  use iso_c_binding
   implicit none
 
 contains
@@ -42,6 +43,39 @@ contains
 
   end function color_map
 
+  subroutine show_rogress(m,p,ml)
+    !! Create a progress bar through successive calls
+    character(*),intent(in)::m
+    !! Message to display
+    real,intent(in)::p
+    !! Progress fraction \(p\in[0,1]\), 0 = start progress 1 = complete progress
+    integer,intent(in),optional::ml
+    !! Message reserve length (used to align long messages)
+
+    real::r
+    integer:: mld, n,k
+    character(3) :: persent
+
+    write(persent,'(i0)') int(p*100)
+
+    N = 70
+    mld = 40
+    if(present(ml)) mld = ml
+
+    write(output_unit,'(a)',advance='no') achar(13)//colorize(m//repeat(' ',mld-len(m))//' [',[5,5,0])
+    do k=1,N
+      r = real(k-1)/real(N-1)
+      if(r<=p) then
+        write(output_unit,'(1a)',advance='no') colorize('=',color_map(r,[0.0,1.0]))
+      else
+        write(output_unit,'(1a)',advance='no') colorize(' ',[0,0,0])
+      end if
+    end do
+    write(output_unit,'(a)',advance='no') colorize('] ',[5,5,0]) //colorize(trim(persent)//' %',color_map(p,[0.0,1.0]))
+    flush(output_unit)
+
+  end subroutine show_rogress
+
 end module learn_color
 
 program color_test
@@ -61,5 +95,33 @@ program color_test
   do n = 0,20
     print*, colorize('corlormap',color_map(v=0.05*n,r=[0.,1.]))
   enddo
+
+  do n = 1,100
+    call wait(0.1)
+    call show_rogress('progress',n/100.0,10)
+  enddo
+  write(output_unit,*)
+
+contains
+  subroutine wait(sec)
+    !<Make the thread sleep
+    real,intent(in)::sec
+    !<Time to sleep in seconds
+
+    integer(c_int)::usec
+    integer(c_int)::ret
+
+    interface
+      function doSleep(usec) result(e) bind(C,name='usleep')
+        use iso_c_binding
+        integer(c_int),value::usec
+        integer(c_int)::e
+      end function doSleep
+    end interface
+
+    usec = nint(sec*1.0E6)
+    ret  = doSleep(usec)
+  end subroutine wait
+
 
 end program color_test
