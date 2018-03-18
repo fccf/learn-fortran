@@ -1,4 +1,6 @@
 # learn-fortran
+## fortran parser 输入
+直接从文本读取数组 [learn_parse](./src/learn_parse.f90)
 ## fortran 时间统计
 [learn_time](./src/learn_time.f90)里面包含fortran程序中时间统计例子，以及程序暂停。
 
