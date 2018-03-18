@@ -1,4 +1,7 @@
 # learn-fortran
+## fortran 时间统计
+[learn_time](./src/learn_time.f90)里面包含fortran程序中时间统计例子，以及程序暂停。
+
 ## 在terminal里面输出带颜色的字体
 linux中terminal里面字体的颜色是在字体前后加上一些特殊字符控制的。[learn_color](./src/learn_color.f90)里面展示了如何控制字体颜色。
 
