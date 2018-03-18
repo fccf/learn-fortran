@@ -1,4 +1,7 @@
 # learn-fortran
+## 在terminal里面输出带颜色的字体
+linux中terminal里面字体的颜色是在字体前后加上一些特殊字符控制的。[learn_color](./src/learn_color.f90)里面展示了如何控制字体颜色。
+
 ## 自动重分配
 fortran 动态数组在数组大小不一致时会自动将等号左边的数据与等号右边的相等，只需要数组的维度相等就形。 [learn_auto_realloc](./src/learn_auto_realloc.f90),[learn_allocatable_character](./src/learn_allocatable_character.f90)
 
