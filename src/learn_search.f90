@@ -1,23 +1,6 @@
-program learn_search
+module learn_search
 
   implicit none
-  integer, allocatable :: iv(:)
-
-  integer :: j
-  integer :: i = 1000
-  integer :: n = 100000
-  logical :: found
-
-  iv = [(j,j=1,n)]
-
-  call search_seq(iv, i, found)
-  print*,'found = ',found
-  found = .FALSE.
-  found = any(iv == i)
-  print*, 'found = ',found
-  found = .FALSE.
-  call search_bin(iv,i,found)
-  print*, 'found = ',found
 
 contains
   subroutine search_seq(iv,i,found)
@@ -59,4 +42,28 @@ contains
 
   end subroutine search_bin
 
-end program learn_search
+end module learn_search
+
+
+program main
+  use learn_search
+  implicit none
+  integer, allocatable :: iv(:)
+
+  integer :: j
+  integer :: i = 1000
+  integer :: n = 100000
+  logical :: found
+
+  iv = [(j,j=1,n)]
+
+  call search_seq(iv, i, found)
+  print*,'found = ',found
+  found = .FALSE.
+  found = any(iv == i)
+  print*, 'found = ',found
+  found = .FALSE.
+  call search_bin(iv,i,found)
+  print*, 'found = ',found
+
+end program main
