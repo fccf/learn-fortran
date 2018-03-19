@@ -1,4 +1,7 @@
 # learn-fortran
+## fortran 枚举器enumerator
+绑定c里面的 enum, 数据必须为整型 [enum](./src/learn_enumerators.f90)
+
 ## 使用 mpi
 使用mpi库需要加上use mpi，编译时添加相应的库和头文件路径。[mpi](./src/learn_mpi.f90)
 
@@ -35,14 +38,12 @@ fortran 动态数组在数组大小不一致时会自动将等号左边的数据
 ## pure 程序
 - pure程序不会对输入参数以及模块中的数据进行修改。局部变量不能有save属性，也不能初始化。
 
-
 ## elemental 程序
 - elemental形参是标量，但输入参数可以是标量也可以是数组，如果是数组，则对数组中的每一个元素进行该操作。 [learn_elemental](./src/learn_elemental.f90)
 
 
 ## class(\*) 类型
 - class(\*)作为输入参数可以实现多态，即输入参数可以为各种数据类型，然后在程序中使用 select type 来对各种不同的数据类型进行不同的操作，相同的操作可以公用。 [learn_class_star](./src/learn_class_star.f90)
-
 
 ## final 程序
 - 一个类绑定的final子程序会在这个类的对象需要销毁的地方自动调用。这些地方包括：
