@@ -1,4 +1,10 @@
 # learn-fortran
+## fortran 可选参数
+fortran的可选参数需要在参数说明时加上optional，可以使用 merge 函数指定局部变量的值。[optional](./learn_optional.f90)
+
+## fortran overwrite
+在terminal里面覆盖原有文字需要在文字前面加上 char(13) [overwrite](./src/learn_overwrite.f90)
+
 ## fortran to_string
 将常用的数据类型转化为string然后输出 [to_string](./src/learn_to_string.f90),
 
