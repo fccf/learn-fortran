@@ -1,6 +1,6 @@
 # learn-fortran
 ## fortran to_string
-将常用的数据类型转化为string然后输出 [learn_to_string](./src/learn_to_string.f90)
+将常用的数据类型转化为string然后输出 [to_string](./src/learn_to_string.f90),
 
 ## fortran get_option
 fortran 从命令行中读入选项，[learn_option](./src/learn_option.f90)中的key:value必须相邻。
