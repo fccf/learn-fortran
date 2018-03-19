@@ -1,6 +1,9 @@
 # learn-fortran
+## 使用 mpi
+使用mpi库需要加上use mpi，编译时添加相应的库和头文件路径。[mpi](./src/learn_mpi.f90)
+
 ## fortran 可选参数
-fortran的可选参数需要在参数说明时加上optional，可以使用 merge 函数指定局部变量的值。[optional](./learn_optional.f90)
+fortran的可选参数需要在参数说明时加上optional，可以使用 merge 函数指定局部变量的值。[optional](./src/learn_optional.f90)
 
 ## fortran overwrite
 在terminal里面覆盖原有文字需要在文字前面加上 char(13) [overwrite](./src/learn_overwrite.f90)
