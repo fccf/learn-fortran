@@ -1,4 +1,6 @@
 # learn-fortran
+## fortran get_option
+fortran 从命令行中读入选项，[learn_option](./src/learn_option.f90)中的key:value必须相邻。
 ## fortran异常处理
 使用[learn_error](./src/learn_error.f90)中的程序可以显示出错贼哪个文件的第几行，也可以直接使用[error stop](./src/learn_error_stop.f90)。
 
