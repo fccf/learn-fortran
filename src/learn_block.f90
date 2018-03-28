@@ -2,7 +2,7 @@ program learn_block
 
   implicit none
 
-  real :: i
+  real :: i, j = 20.
 
   i = 30.0
 
@@ -11,8 +11,9 @@ program learn_block
     do i = 1,3
       print*, i
     enddo
+    print*,j
   end block
 
-  print*, i
+  print*,i
 
 end program learn_block
