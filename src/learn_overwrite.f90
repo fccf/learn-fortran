@@ -17,6 +17,7 @@ program learn_overwrite
     write(*,'(a,f6.2,a)',advance='no') char(13),100*i/real(n),'%'
     info = doSleep(100000)
   enddo
+  write(*,*)
 
 
 end program learn_overwrite

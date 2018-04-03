@@ -1,5 +1,4 @@
 program learn_enumerators
-  ! use iso_c_binding
   implicit none
 
   enum, bind(c)

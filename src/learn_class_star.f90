@@ -7,11 +7,13 @@ module learn_class_star
   end interface str
 
 contains
-
-  function scalar_to_string(value) result(s)
-    class(*), intent(in) :: value
+  !=============================================================================
+  pure function scalar_to_string(value) result(s)
+    !< convert any scalar type (integer, real, logical, character(*)) to string
+    class(*), intent(in)      :: value
     character(:), allocatable :: s
-    character(32) :: ls
+    integer, parameter        :: max_num_len_ = 32
+    character(max_num_len_)   :: ls
 
     select type(v_p => value)
     type is(integer)
@@ -29,64 +31,68 @@ contains
       s = trim(adjustl(ls))
     type is(character(*))
       s = trim(adjustl(v_p))
-
-      class default
+    class default
       write(ls,'(a)') '***'
       s = trim(adjustl(ls))
     end select
-
   end function scalar_to_string
-
-
-
-  function vector_to_string(value, vsep) result(s)
+  !=============================================================================
+  pure function vector_to_string(value, vsep, shell) result(s)
+    !< convert any vector type (integer, real, logical, character(*)) to string
     class(*), intent(in) :: value(:)
-    character(*), intent(in), optional :: vsep
+    character(*), intent(in), optional :: vsep   !< vector separator ',', ' '
+    logical,intent(in), optional :: shell        !< if have the shell []
     character(:), allocatable :: s
 
     character(:),allocatable :: lsep
+    logical :: lshell
     integer :: n
 
-    lsep = ','
-    if(present(vsep)) lsep = vsep
+    lsep = ','      !< default vector separator
+    lshell = .TRUE. !< default shell = true
+    if(present(vsep)) lsep = vsep !< local optional argument
+    if(present(shell)) lshell = shell !< another local argument
 
-    s = '['
+    s = ''
+    if(lshell) s = '['
     do n = 1, size(value)
       if (n > 1) s = s//lsep
-      s = s // str(value(n))
+      s = s // str(value(n))    !< str => scalar_to_string
     end do
-
-    s = s// ']'
+    if(lshell) s = s// ']'
 
   end function vector_to_string
-
-
-
-  function matrix_to_string(value, vsep, msep) result(s)
+  !=============================================================================
+  pure function matrix_to_string(value, vsep, msep, shell) result(s)
     class(*), intent(in) :: value(:,:)
-    character(*), intent(in), optional :: vsep
-    character(*), intent(in), optional :: msep
+    character(*), intent(in), optional :: vsep  !< vector separator ',', ' '
+    character(*), intent(in), optional :: msep  !< matrix separator ';', new_line('a')
+    logical,intent(in), optional :: shell       !< if have the shell []
 
     character(:), allocatable :: s
 
     character(:),allocatable :: lvsep, lmsep
+    logical :: lshell
     integer   :: n, m
     lvsep = ','
     lmsep = ';'
+    lshell = .TRUE.
     if(present(vsep)) lvsep = vsep
     if(present(msep)) lmsep = msep
+    if(present(shell)) lshell = shell
 
-    s = '['
+    s = ''
+    if(lshell) s = '['
     do n = 1, size(value,2)
       if (n > 1) s = s//lmsep
-      s = s//'['
+      if(lshell) s = s//'['
       do m = 1, size(value, 1)
         if (m > 1) s = s//lvsep
-        s = s // str(value(m,n))
+        s = s // str(value(m,n))    !< str => scalar_to_string
       enddo
-      s = s//']'
+      if(lshell) s = s//']'
     enddo
-    s = s//']'
+    if(lshell) s = s//']'
 
   end function matrix_to_string
 
